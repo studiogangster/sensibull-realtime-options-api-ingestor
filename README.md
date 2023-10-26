@@ -1,4 +1,4 @@
-# Project Title: Sensibull Options Chain WebSocket Data Fetcher
+# Project Title: Realtime Option Algo Traader
 
 ## Project Description
 The Sensibull Options Chain WebSocket Data Fetcher is a Node.js program that enables real-time retrieval of options chain data from the Sensibull options trading platform. This project reverse-engineers the data structures and protocols used by Sensibull's WebSocket API to provide traders and developers with a tool for accessing crucial options trading data in real time. 
