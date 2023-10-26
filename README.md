@@ -15,8 +15,8 @@ Follow these steps to get started with the Sensibull Options Chain WebSocket Dat
 1. **Installation**: Clone this repository and install the necessary dependencies.
 
    ```
-   git clone https://github.com/your-username/sensibull-options-fetcher.git
-   cd sensibull-options-fetcher
+   git clone https://github.com/your-username/realtime-option-algo-trader.git
+   cd realtime-option-algo-trader
    npm install
    ```
 
