@@ -28,6 +28,10 @@ Follow these steps to get started with the Sensibull Options Chain WebSocket Dat
    npm start
    ```
 
+
+<img width="222" alt="Screenshot 2023-10-26 at 3 12 33 PM" src="https://github.com/studiogangster/realtime-option-algo-trader/assets/12793420/314a00b3-ff84-4c52-9798-5387e0aeea1c">
+<img width="526" alt="Screenshot 2023-10-26 at 3 14 16 PM" src="https://github.com/studiogangster/realtime-option-algo-trader/assets/12793420/2aeea27c-b7bc-4395-b408-86b6ea749ed0">
+
 4. **Use the Data**: The fetched options data can be used in your trading or analysis projects.
    
 # To-Do and Coming Features
