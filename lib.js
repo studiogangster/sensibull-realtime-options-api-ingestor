@@ -571,6 +571,14 @@ function BR(e) {
     }
 }
 
+function QR(e) {
+    const t = FR(e.slice(0, 4)),
+        i = (0, Hr_iF)(e.slice(4)),
+        n = new TextDecoder("utf-8").decode(i);
+    return {
+        [t]: JSON.parse(n)
+    }
+}
 
 function XR(e) {
     if (!e || e.byteLength <= 0) throw new Error("empty binary packet cannot be processed");
@@ -578,20 +586,135 @@ function XR(e) {
         i = t[0];
     switch (i) {
         case WR.OPTION_CHAIN:
-            let _payload  = BR(t.slice(1));
+            let _payload = BR(t.slice(1));
             // console.log('token' , _payload.token)
             return {
-                token: _payload.token  , expiry: _payload.expiry,  kind: JR.OPTION_CHAIN, packetId: i, payload: _payload 
+                token: _payload.token, expiry: _payload.expiry, kind: JR.OPTION_CHAIN, packetId: i, payload: _payload
             };
         case WR.UNDERLYING_STATS:
+            // console.log('token' , 'UNDERLYING_STATS');
             return {
-                kind: JR.UNDERLYING_STATS, packetId: i, payload: QR(t.slice(1))
+                token: 'ALL', expiry: 'UNDERLYING_STATS', kind: JR.UNDERLYING_STATS, packetId: i, payload: QR(t.slice(1))
             };
         case WR.SCREENER_STATS:
             return {
                 kind: JR.SCREENER_STATS, packetId: i, payload: VR(t.slice(1))
             };
         case WR.QUOTE: {
+
+            function fn18797(e, t, i) {
+                "use strict";
+                i.d(t, {
+                    F7: () => E,
+                    J_: () => g,
+                    Th: () => N,
+                    Tn: () => y,
+                    Zs: () => m,
+                    dL: () => M,
+                    eF: () => T,
+                    o5: () => I,
+                    p6: () => p
+                });
+                var n = i(72981),
+                    o = i(63148),
+                    r = i.n(o),
+                    a = i(15616),
+                    l = i.n(a),
+                    s = i(62382),
+                    d = i.n(s),
+                    c = i(91884),
+                    u = i.n(c);
+
+                function g(e) {
+                    return d()(e)
+                }
+                const p = (e, t) => {
+                    try {
+                        return l()(new Date(e), t)
+                    } catch (i) {
+                        return e.toString()
+                    }
+                },
+                    I = e => {
+                        try {
+                            return l()(new Date(e), "yyyy-MM-dd")
+                        } catch (t) {
+                            return e.toString()
+                        }
+                    },
+                    y = e => {
+                        try {
+                            return l()(new Date(e), "dd MMM")
+                        } catch (t) {
+                            return e.toString()
+                        }
+                    };
+
+                function M(e) {
+                    try {
+                        return l()(new Date(e), "MMM do")
+                    } catch (t) {
+                        return e
+                    }
+                }
+                const m = (e, t) => {
+                    try {
+                        const i = u()(e, "yyyy-MM-dd", new Date),
+                            n = u()(t, "yyyy-MM-dd", new Date);
+                        return r()(n, i)
+                    } catch (i) {
+                        return NaN
+                    }
+                };
+
+                function N(e) {
+                    try {
+                        return l()(new Date(e), "do MMM")
+                    } catch (t) {
+                        return e
+                    }
+                }
+
+                function E(e) {
+                    const t = new Date(e);
+                    try {
+                        return (0, n.Z)(t, "Asia/Kolkata", "yyyy-MM-dd HH:mm:ss")
+                    } catch (i) {
+                        return t.toDateString()
+                    }
+                }
+
+                function T(e) {
+                    try {
+                        return l()(new Date(e), "MMM")
+                    } catch (t) {
+                        return e
+                    }
+                }
+            }
+
+            var RR = fn18797;
+
+            function RR_F7(e) {
+                const t = new Date(e);
+                try {
+                    return (0, n.Z)(t, "Asia/Kolkata", "yyyy-MM-dd HH:mm:ss")
+                } catch (i) {
+                    return t.toDateString()
+                }
+            }
+
+            const wR = 3,
+                kR = 9,
+                UR = "full",
+                YR = "quote",
+                ZR = "ltp";
+
+            function GR(e) {
+                return (0, RR_F7)(1e3 * e)
+
+            }
+
             const e = function (e) {
                 const t = FR(e.slice(0, 4)),
                     i = 255 & t;
@@ -670,6 +793,8 @@ function XR(e) {
                 return null
             }(t.slice(1));
             if (e) return {
+                token: 'ALL',
+                expiry: 'QUOTE',
                 kind: JR.QUOTE,
                 packetId: i,
                 payload: e
@@ -690,6 +815,8 @@ function XR(e) {
             };
         case WR.CUSTOM_PING:
             return {
+                token: 'PING',
+                expiry: 'CUSTOM_PING',
                 kind: JR.CUSTOM_PING, packetId: i, payload: {}
             };
         case WR.INVALID:
@@ -717,7 +844,7 @@ const output_dir = 'scrapped_data'
 var fs = require('fs');
 var dir = `./${output_dir}`;
 
-if (!fs.existsSync(dir)){
+if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
 }
 
@@ -726,7 +853,8 @@ function print(data) {
 
 
     const jsonObject = data;
-    fs.appendFileSync(  `${dir}/${data.token}:${data.expiry}.json` , '\r\n' + JSON.stringify(jsonObject));
+    if (data.token)
+        fs.appendFileSync(`${dir}/${data.token}:${data.expiry}.json`, '\r\n' + JSON.stringify(jsonObject));
 
 
 
@@ -766,13 +894,13 @@ function getAllExpiry() {
         if (i === 0 && currentMonthIncluded == true) {
             // Include the current month if today is the last Thursday
             // console.log(`Last Thursday of ${format(currentDate, 'MMMM yyyy')}: ${format(lastThursdayOfCurrentMonth, 'yyyy-MM-dd')}`);
-            expiries.push(`${format(lastThursdayOfCurrentMonth, 'yyyy-MM-dd')}` );
+            expiries.push(`${format(lastThursdayOfCurrentMonth, 'yyyy-MM-dd')}`);
         } else {
             currentDate.setMonth(currentDate.getMonth() + 1);
 
             const lastThursday = lastThursdayOfMonth(currentDate.getFullYear(), currentDate.getMonth());
             // console.log(`Last Thursday of ${format(currentDate, 'MMMM yyyy')}: ${format(lastThursday, 'yyyy-MM-dd')}`);
-            expiries.push(`${format(lastThursday, 'yyyy-MM-dd')}` );
+            expiries.push(`${format(lastThursday, 'yyyy-MM-dd')}`);
 
         }
 

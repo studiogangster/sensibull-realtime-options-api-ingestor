@@ -12,7 +12,9 @@ const customHeaders = {
     'Origin': 'https://web.sensibull.com'
 };
 
-const expiries = lib.expiries();
+var expiries = lib.expiries();
+
+expiries = [expiries.shift()]
 
 expiries.forEach((expiry) => {
 
@@ -38,6 +40,10 @@ expiries.forEach((expiry) => {
 
         })
 
+
+        // scrips = [scrips.shift()];
+        // underlying-stats
+
         // console.log(scrips);
         let message = {
             "msgCommand": "subscribe", "dataSource": "option-chain", "brokerId": 1, "tokens": [], "underlyingExpiry": scrips
@@ -45,14 +51,33 @@ expiries.forEach((expiry) => {
         };
 
         message = JSON.stringify(message);
-        console.log(message)
+        // console.log(message);
         // Send a message to the server after connecting
         ws.send(message);
+
+
+        // Debug
+
+        scrips = scrips.map(script=>script.underlying);
+        let msg = { "msgCommand": "subscribe", "dataSource": "underlying-stats", "brokerId": 1, "tokens": scrips, "underlyingExpiry": [], "uniqueId": "" };
+        // console.log(msg);
+
+        msg = JSON.stringify(msg);
+        ws.send(msg);
+
+        msg = { "msgCommand": "subscribe", "dataSource": "quote-binary", "brokerId": 1, "tokens": scrips, "underlyingExpiry": [], "uniqueId": "" };
+        // console.log(msg);
+
+        msg = JSON.stringify(msg);
+
+        ws.send(msg);
+
     });
 
     ws.on('message', (data) => {
         // console.log(`Received: ${data}`);
         let message = lib.decodeData(data);
+        console.log(message)
         lib.print(message)
 
     });
