@@ -556,7 +556,7 @@ function BR(e) {
 
     // console.log(t, n, l, i);
     let _timestamp = new Date();
-    console.log(t, l, _timestamp);
+    // console.log(t, l, _timestamp);
 
     return {
         token: t,

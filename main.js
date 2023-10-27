@@ -77,7 +77,7 @@ expiries.forEach((expiry) => {
     ws.on('message', (data) => {
         // console.log(`Received: ${data}`);
         let message = lib.decodeData(data);
-        console.log(message)
+        // console.log(message)
         lib.print(message)
 
     });
