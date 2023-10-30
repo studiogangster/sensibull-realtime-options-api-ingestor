@@ -1,0 +1,76 @@
+{
+    "token": 1793,
+    "expiry": "2023-10-26",
+    "kind": 3,
+    "packetId": 3,
+    "payload": {
+        "token": 1793,
+        "expiry": "2023-10-26",
+        "data": {
+            "1793": {
+                "2023-10-26": {
+                    "atm_strike": 440,
+                    "atm_iv": 3.5999999999999996,
+                    "atm_iv_change": -22.400000000000002,
+                    "atm_iv_percentile": 0,
+                    "atm_ivp_type": "Low",
+                    "pcr": 0.32,
+                    "max_pain_strike": 485,
+                    "chain": {
+                        "370": {
+                            "CE": {
+                                "instrument_token": 17274370,
+                                "last_price": 0,
+                                "net_change": null,
+                                "oi": 0,
+                                "oi_change": 0,
+                                "is_liquid": false,
+                                "liquidity_warnings": [
+                                    "high-bid-offer-spread"
+                                ],
+                                "volume": 0,
+                                "best_buy_price": 65.3,
+                                "best_sell_price": 73.75,
+                                "oi_change_quantity": 0,
+                                "intrinsic_value": 69.95,
+                                "intrinsic_value_from_spot": 70.4,
+                                "time_value": null,
+                                "pop": null
+                            },
+                            "PE": {
+                                "instrument_token": 17274626,
+                                "last_price": 0,
+                                "net_change": null,
+                                "oi": 0,
+                                "oi_change": 0,
+                                "is_liquid": false,
+                                "liquidity_warnings": [
+                                    "high-bid-offer-spread"
+                                ],
+                                "volume": 0,
+                                "best_buy_price": 0,
+                                "best_sell_price": 0.9,
+                                "oi_change_quantity": 0,
+                                "intrinsic_value": 0,
+                                "intrinsic_value_from_spot": 0,
+                                "time_value": null,
+                                "pop": null
+                            },
+                            "strike": 370,
+                            "pcr": null,
+                            "ivChange": 139.9,
+                            "greeks": {
+                                "callDelta": 0.9951,
+                                "gamma": 0.0005,
+                                "impliedVolatility": 287.3,
+                                "putDelta": -0.0049000000000000155,
+                                "theta": -0.05,
+                                "vega": 0.0016
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

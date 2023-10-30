@@ -44249,6 +44249,8 @@ const instruments =  [
     }
   ];
 
+const InstrumentLatestPriceCache = new Map( [])
+
 module.exports = {
   instruments: function () {
       return instruments.filter (  i=>!!!i.is_non_fno ).map(i=>{
@@ -44257,5 +44259,6 @@ module.exports = {
   },
   instrument_ids : function(){
 
-  }
+  },
+  iCache: InstrumentLatestPriceCache,
 };

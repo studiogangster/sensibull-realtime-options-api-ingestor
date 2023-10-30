@@ -53,7 +53,7 @@ expiries.forEach((expiry) => {
         message = JSON.stringify(message);
         // console.log(message);
         // Send a message to the server after connecting
-        ws.send(message);
+        // ws.send(message);
 
 
         // Debug
@@ -71,6 +71,11 @@ expiries.forEach((expiry) => {
         msg = JSON.stringify(msg);
 
         ws.send(msg);
+
+
+        // 
+        ws.send(message);
+
 
     });
 

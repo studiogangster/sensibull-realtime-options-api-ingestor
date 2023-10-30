@@ -1,6 +1,7 @@
 
 const instruments = require('./instruments_symbols.js');
 
+
 function decodeUint8ArrayToTimestamp(uint8Array) {
     let timestampString = "";
     for (let i = 0; i < uint8Array.length; i++) {
@@ -588,8 +589,9 @@ function XR(e) {
         case WR.OPTION_CHAIN:
             let _payload = BR(t.slice(1));
             // console.log('token' , _payload.token)
+            let snapshot = instruments.iCache.get(_payload.token);
             return {
-                token: _payload.token, expiry: _payload.expiry, kind: JR.OPTION_CHAIN, packetId: i, payload: _payload
+                token: _payload.token, expiry: _payload.expiry, kind: JR.OPTION_CHAIN, packetId: i, payload: _payload ,  snapshot: snapshot
             };
         case WR.UNDERLYING_STATS:
             // console.log('token' , 'UNDERLYING_STATS');
@@ -792,13 +794,19 @@ function XR(e) {
                 }
                 return null
             }(t.slice(1));
-            if (e) return {
-                token: 'ALL',
-                expiry: 'QUOTE',
-                kind: JR.QUOTE,
-                packetId: i,
-                payload: e
-            };
+            if (e) {
+
+                let insrumentToken = e.instrumentToken;
+                instruments.iCache.set(insrumentToken, e);
+
+                return {
+                    token: 'ALL',
+                    expiry: 'QUOTE',
+                    kind: JR.QUOTE,
+                    packetId: i,
+                    payload: e
+                };
+            }
             throw new Error("empty quote packet received")
         }
         case WR.ORDER_UPDATES:
