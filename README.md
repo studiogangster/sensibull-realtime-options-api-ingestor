@@ -17,7 +17,7 @@ Follow these steps to get started with the Sensibull Options Chain WebSocket Dat
    ```
    git clone https://github.com/your-username/realtime-option-algo-trader.git
    cd realtime-option-algo-trader
-   npm install
+   docker-compose up
    ```
 
 2. **Configuration**: Update the configuration file with your Sensibull API credentials and other settings as required.
