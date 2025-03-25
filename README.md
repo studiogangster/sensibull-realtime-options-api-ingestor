@@ -74,4 +74,3 @@ This project is licensed under the [MIT License](LICENSE).
 - Sensibull API
 - Open Source
 
-Feel free to customize this template to fit the specifics of your project, and make sure to include detailed information on how to use and contribute to your project.
